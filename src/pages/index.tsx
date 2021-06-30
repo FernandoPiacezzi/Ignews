@@ -8,7 +8,7 @@ import styles from "./home.module.scss";
 interface HomeProps {
   product: {
     priceId: string;
-    amount: number;
+    amount: string;
   }
 }
 
@@ -29,7 +29,7 @@ export default function Home({product}: HomeProps) {
             Get access to all the publication <br />
             <span>for {product.amount} month</span>
           </p>
-          <SubscribeButton priceId={product.priceId} />
+          <SubscribeButton />
         </section>
 
         <img src="/images/avatar.svg" alt="" />
@@ -42,7 +42,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const price = await stripe.prices.retrieve("price_1IaTXQJ7THCcmooHAvczNe9p");
 
   const product = {
-    prideId: price.id,
+    priceId: price.id,
     amount: new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
